@@ -2,7 +2,6 @@
 using GraphVizWrapper.Commands;
 using GraphVizWrapper.Queries;
 using System.IO;
-using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace GraphConnectivity
@@ -10,7 +9,7 @@ namespace GraphConnectivity
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         public MainWindow()
         {
@@ -26,7 +25,7 @@ namespace GraphConnectivity
                                               getProcessStartInfoQuery,
                                               registerLayoutPluginCommand);
 
-            byte[] output = wrapper.GenerateGraph("digraph{Rafał -> Motyka; Motyka -> RaV; Motyka -> Motyka96; Motyka96->Rafał;Motyka->Rafał;}", Enums.GraphReturnType.Png);
+            var output = wrapper.GenerateGraph("digraph{Rafał -> Motyka; Motyka -> RaV; Motyka -> Motyka96; Motyka96->Rafał;Motyka->Rafał;}", Enums.GraphReturnType.Png);
 
             var bitmapImage = new BitmapImage();
             bitmapImage.BeginInit();
