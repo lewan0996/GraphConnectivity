@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphConnectivity", "GraphConnectivity\GraphConnectivity.csproj", "{32A05CAA-D7FD-48E4-B2A3-B13312363042}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphConnectivity.Core", "GraphConnectivity.Core\GraphConnectivity.Core.csproj", "{3E70A733-A925-4645-9E30-78C0F9622D23}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{32A05CAA-D7FD-48E4-B2A3-B13312363042}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32A05CAA-D7FD-48E4-B2A3-B13312363042}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32A05CAA-D7FD-48E4-B2A3-B13312363042}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E70A733-A925-4645-9E30-78C0F9622D23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E70A733-A925-4645-9E30-78C0F9622D23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E70A733-A925-4645-9E30-78C0F9622D23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E70A733-A925-4645-9E30-78C0F9622D23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
