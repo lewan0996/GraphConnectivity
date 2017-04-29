@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace GraphConnectivity.Core.Models
 {
-    internal class Graph<T>
+    public class Graph<T>
     {
         public class Vertex<TValue>
         {
@@ -35,18 +36,15 @@ namespace GraphConnectivity.Core.Models
             Vertices = new List<Vertex<T>>();
         }
 
-        public override string ToString()
+        public void AddVertex(T value)
         {
-            var graphString = "digraph{";
+            Vertex<T> vertex = new Vertex<T>(value);
+            Vertices.Add(vertex);
+        }
 
-            foreach (var vertex in Vertices)
-            {
-                foreach (var edge in vertex.AdjacentEdges)
-                {
-                    graphString += vertex.Value + " -> " + edge.To.Value;
-                }
-            }
-            return graphString;
+        public void RemoveVertexByValue(T value)
+        {
+            Vertex<T> vertex = Vertices.FirstOrDefault(v => v.Value.Equals(value));
         }
     }
 }
