@@ -100,6 +100,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GraphConnectivity.Core\GraphConnectivity.Core.csproj">
+      <Project>{3e70a733-a925-4645-9e30-78c0f9622d23}</Project>
+      <Name>GraphConnectivity.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

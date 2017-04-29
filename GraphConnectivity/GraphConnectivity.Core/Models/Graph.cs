@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace GraphConnectivity.Core.Models
 {
@@ -38,7 +37,16 @@ namespace GraphConnectivity.Core.Models
 
         public override string ToString()
         {
-            return Vertices.Aggregate("digraph{", (current1, vertex) => vertex.AdjacentEdges.Aggregate(current1, (current, edge) => current + vertex.Value.ToString() + " -> " + edge.To.Value.ToString()));
+            var graphString = "digraph{";
+
+            foreach (var vertex in Vertices)
+            {
+                foreach (var edge in vertex.AdjacentEdges)
+                {
+                    graphString += vertex.Value + " -> " + edge.To.Value;
+                }
+            }
+            return graphString;
         }
     }
 }
