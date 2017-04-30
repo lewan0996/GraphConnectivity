@@ -63,6 +63,18 @@ namespace GraphConnectivity.Core.ViewModels
             }
         }
 
+        private MvxCommand _removeVertexCommand;
+
+        public MvxCommand RemoveVertexCommand
+        {
+            get
+            {
+                _removeVertexCommand = _removeVertexCommand ?? new MvxCommand(RemoveVertexHandler);
+                return _removeVertexCommand;
+            }
+        }
+
+
         private MvxCommand _addEdgeCommand;
 
         public MvxCommand AddEdgeCommand
@@ -74,6 +86,16 @@ namespace GraphConnectivity.Core.ViewModels
             }
         }
 
+        private MvxCommand _removeEdgeCommand;
+
+        public MvxCommand RemoveEdgeCommand
+        {
+            get
+            {
+                _removeEdgeCommand = _removeEdgeCommand ?? new MvxCommand(RemoveEdgeHandler);
+                return _removeEdgeCommand;
+            }
+        }
 
         private bool _isConnected;
 
@@ -94,25 +116,33 @@ namespace GraphConnectivity.Core.ViewModels
         private void RefreshVisualisation()
         {
             ImageBytes = _graphVizualiser.VisualiseGraph(_graph);
+
+            NewEdgeFromValue = "";
+            NewEdgeToValue = "";
+            NewVertexValue = "";
         }
 
         private void AddVertexHandler()
         {
             _graph.AddVertex(NewVertexValue);
-            NewVertexValue = "";
+            RefreshVisualisation();
+        }
+
+        private void RemoveVertexHandler()
+        {
+            _graph.RemoveVertexByValue(NewVertexValue);
             RefreshVisualisation();
         }
 
         private void AddEdgeHandler()
         {
-            var vertexFrom = _graph.Vertices.FirstOrDefault(v => v.Value == NewEdgeFromValue);
-            var vertexTo = _graph.Vertices.FirstOrDefault(v => v.Value == NewEdgeToValue);
+            _graph.AddEdgeByValues(NewEdgeFromValue, NewEdgeToValue);
+            RefreshVisualisation();
+        }
 
-            vertexFrom.AdjacentEdges.Add(new Graph<string>.Edge<string, string>(vertexFrom, vertexTo));
-
-            NewEdgeFromValue = "";
-            NewEdgeToValue = "";
-
+        private void RemoveEdgeHandler()
+        {
+            _graph.RemoveEdgeByValues(NewEdgeFromValue, NewEdgeToValue);
             RefreshVisualisation();
         }
     }

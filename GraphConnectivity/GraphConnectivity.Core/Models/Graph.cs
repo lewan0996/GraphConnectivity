@@ -50,14 +50,37 @@ namespace GraphConnectivity.Core.Models
 
             foreach (var vertex in Vertices)
             {
-                foreach (var edge in vertex.AdjacentEdges)
+                /*foreach (var edge in vertex.AdjacentEdges)
                 {
                     if (edge.To == vertexToRemove)
                     {
                         vertex.AdjacentEdges.Remove(edge);
                     }
-                }
+                }*/
+                vertex.AdjacentEdges.RemoveAll(e => e.To.Value.Equals(value));
             }
+        }
+
+        public void AddEdge(Vertex<T> from, Vertex<T> to)
+        {
+            var edgeToAdd = new Edge<T, T>(from, to);
+            from.AdjacentEdges.Add(edgeToAdd);
+        }
+
+        public void AddEdgeByValues(T from, T to)
+        {
+            var vertexFrom = Vertices.FirstOrDefault(v => v.Value.Equals(from));
+            var vertexTo = Vertices.FirstOrDefault(v => v.Value.Equals(to));
+            
+            AddEdge(vertexFrom, vertexTo);
+        }
+
+        public void RemoveEdgeByValues(T from, T to)
+        {
+            var verticeFrom = Vertices.FirstOrDefault(v => v.Value.Equals(from));
+            var edgeToRemove = verticeFrom.AdjacentEdges.FirstOrDefault(e => e.To.Value.Equals(to));
+
+            verticeFrom.AdjacentEdges.Remove(edgeToRemove);
         }
     }
 }
