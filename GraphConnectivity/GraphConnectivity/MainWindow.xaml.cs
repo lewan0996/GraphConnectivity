@@ -17,12 +17,12 @@ namespace GraphConnectivity
 
             
 
-            var bitmapImage = new BitmapImage();
+           /* var bitmapImage = new BitmapImage();
             bitmapImage.BeginInit();
             //bitmapImage.StreamSource = new MemoryStream(output);
             bitmapImage.EndInit();
 
-            imgGraph.Source = bitmapImage;
+            imgGraph.Source = bitmapImage;*/
         }
     }
 }
