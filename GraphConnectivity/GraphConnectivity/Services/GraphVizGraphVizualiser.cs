@@ -29,11 +29,17 @@ namespace GraphConnectivity.Services
 
             foreach (var vertex in graph.Vertices)
             {
+                if (vertex.AdjacentEdges.Count == 0)
+                {
+                    graphString += vertex.Value + ";";
+                    continue;
+                }
                 foreach (var edge in vertex.AdjacentEdges)
                 {
-                    graphString += vertex.Value + " -> " + edge.To.Value;
+                    graphString += vertex.Value + " -> " + edge.To.Value + ";";
                 }
             }
+            graphString += "}";
             return graphString;
         }
     }

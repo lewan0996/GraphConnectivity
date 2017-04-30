@@ -1,4 +1,5 @@
-﻿using GraphConnectivity.Core.Models;
+﻿using System.Linq;
+using GraphConnectivity.Core.Models;
 using GraphConnectivity.Core.Services;
 using MvvmCross.Core.ViewModels;
 
@@ -27,18 +28,29 @@ namespace GraphConnectivity.Core.ViewModels
             }
         }
 
+        private string _newEdgeFromValue;
 
-       /* private MvxCommand _refreshVisualisationCommand;
-
-        public MvxCommand RefreshVisualisationCommand
+        public string NewEdgeFromValue
         {
-            get
+            get { return _newEdgeFromValue; }
+            set
             {
-                _refreshVisualisationCommand = _refreshVisualisationCommand ?? new MvxCommand(RefreshVisualisation);
-                return _refreshVisualisationCommand;
+                _newEdgeFromValue = value;
+                RaisePropertyChanged(() => NewEdgeFromValue);
             }
+        }
 
-        }*/
+        private string _newEdgeToValue;
+
+        public string NewEdgeToValue
+        {
+            get { return _newEdgeToValue; }
+            set
+            {
+                _newEdgeToValue = value;
+                RaisePropertyChanged(() => NewEdgeToValue);
+            }
+        }
 
         private MvxCommand _addVertexCommand;
 
@@ -48,6 +60,17 @@ namespace GraphConnectivity.Core.ViewModels
             {
                 _addVertexCommand = _addVertexCommand ?? new MvxCommand(AddVertexHandler);
                 return _addVertexCommand;
+            }
+        }
+
+        private MvxCommand _addEdgeCommand;
+
+        public MvxCommand AddEdgeCommand
+        {
+            get
+            {
+                _addEdgeCommand = _addEdgeCommand ?? new MvxCommand(AddEdgeHandler);
+                return _addEdgeCommand;
             }
         }
 
@@ -76,6 +99,20 @@ namespace GraphConnectivity.Core.ViewModels
         private void AddVertexHandler()
         {
             _graph.AddVertex(NewVertexValue);
+            NewVertexValue = "";
+            RefreshVisualisation();
+        }
+
+        private void AddEdgeHandler()
+        {
+            var vertexFrom = _graph.Vertices.FirstOrDefault(v => v.Value == NewEdgeFromValue);
+            var vertexTo = _graph.Vertices.FirstOrDefault(v => v.Value == NewEdgeToValue);
+
+            vertexFrom.AdjacentEdges.Add(new Graph<string>.Edge<string, string>(vertexFrom, vertexTo));
+
+            NewEdgeFromValue = "";
+            NewEdgeToValue = "";
+
             RefreshVisualisation();
         }
     }

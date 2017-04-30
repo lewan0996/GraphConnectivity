@@ -57,6 +57,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -76,6 +77,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\ByteToBitmapValueConverter.cs" />
+    <Compile Include="Converters\NativeByteToBitmapValueConverter.cs" />
+    <Compile Include="NativeByteToBitmapConverter.cs" />
     <Compile Include="Services\GraphVizGraphVizualiser.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="Views\MainView.xaml.cs">
