@@ -12,7 +12,7 @@ namespace GraphConnectivity.Core.ViewModels
 
         public MainViewModel(IGraphVizualiser graphVizualiser)
         {
-            this._graphVizualiser = graphVizualiser;
+            _graphVizualiser = graphVizualiser;
             _graph = new Graph<string>();
         }
 

@@ -45,7 +45,19 @@ namespace GraphConnectivity.Core.Models
 
         public void RemoveVertexByValue(T value)
         {
-            Vertex<T> vertex = Vertices.FirstOrDefault(v => v.Value.Equals(value));
+            var vertexToRemove = Vertices.FirstOrDefault(v => v.Value.Equals(value));
+            Vertices.Remove(vertexToRemove);
+
+            foreach (var vertex in Vertices)
+            {
+                foreach (var edge in vertex.AdjacentEdges)
+                {
+                    if (edge.To == vertexToRemove)
+                    {
+                        vertex.AdjacentEdges.Remove(edge);
+                    }
+                }
+            }
         }
     }
 }
