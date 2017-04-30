@@ -82,5 +82,15 @@ namespace GraphConnectivity.Core.Models
 
             verticeFrom.AdjacentEdges.Remove(edgeToRemove);
         }
+        
+        public bool CalculateConnectivity()
+        {
+            return Vertices.Count % 2 == 0;
+        }
+
+        public bool CalculateStrongConnectivity()
+        {
+            return !CalculateConnectivity();
+        }
     }
 }

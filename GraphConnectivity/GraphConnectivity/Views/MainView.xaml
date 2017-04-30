@@ -11,40 +11,54 @@
              xmlns:converters="clr-namespace:GraphConnectivity.Converters"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="400">
-  
-  <views:MvxWpfView.Resources>
-    <converters:NativeByteToBitmapValueConverter x:Key="ByteToBitmapValueConverter"/>
-  </views:MvxWpfView.Resources>
-  
-  <Grid Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="*"/>
-      <ColumnDefinition Width="*"/>
-      <ColumnDefinition Width="4*"/>
-    </Grid.ColumnDefinitions>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="*"/>
-      <RowDefinition Height="*"/>
-      <RowDefinition Height="*"/>
-      <RowDefinition Height="*"/>
-      <RowDefinition Height="*"/>
-      <RowDefinition Height="*"/>
-      <RowDefinition Height="*"/>
-    </Grid.RowDefinitions>
 
-    <Label Content="Wierzchołki" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
-    <TextBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="35" TextAlignment="Center" Text="{Binding NewVertexValue, Mode=TwoWay}"/>
-    <Button Grid.Column="0" Grid.Row="2" Content="Dodaj" FontSize="20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Command="{Binding AddVertexCommand}"/>
-    <Button Grid.Column="1" Grid.Row="2" Content="Usuń" FontSize="20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Command="{Binding RemoveVertexCommand}"/>
-    <Label Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Content="Krawędzie" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
-    <Label Grid.Column="0" Grid.Row="4" Content="Od" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    <TextBox Grid.Column="1" Grid.Row="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="35" TextAlignment="Center" Text="{Binding NewEdgeFromValue,Mode=TwoWay}"/>
-    <Label Grid.Column="0" Grid.Row="5" Content="Do" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    <TextBox Grid.Column="1" Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="35" TextAlignment="Center" Text="{Binding NewEdgeToValue,Mode=TwoWay}"/>
-    <Button Grid.Column="0" Grid.Row="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Dodaj" FontSize="20" Command="{Binding AddEdgeCommand}"/>
-    <Button Grid.Column="1" Grid.Row="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Usuń" FontSize="20" Command="{Binding RemoveEdgeCommand}"/>
-    <Image Grid.Row="0" Grid.Column="2" Grid.RowSpan="7" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="{Binding ImageBytes,Mode=OneWay,Converter={StaticResource ByteToBitmapValueConverter}}"/>
-    
-  </Grid>
+    <views:MvxWpfView.Resources>
+        <converters:NativeByteToBitmapValueConverter x:Key="ByteToBitmapValueConverter"/>
+
+      <Style TargetType="Label">
+          <Setter Property="Foreground" Value="Black"/>
+          <Style.Triggers>
+              <Trigger Property="IsEnabled" Value="False">
+                  <Setter Property="Foreground" Value="LightGray"/>
+              </Trigger>
+          </Style.Triggers>
+      </Style>
+    </views:MvxWpfView.Resources>
+
+    <Grid Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Wierzchołki" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
+        <Label Content="Spójny" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20" IsEnabled="{Binding IsConnected,Mode=OneWay}"/>
+        <Label Content="Silnie spójny" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20" IsEnabled="{Binding IsStronglyConnected}"/>
+        <TextBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="35" TextAlignment="Center" Text="{Binding NewVertexValue, Mode=TwoWay}"/>
+        <Button Grid.Row="2" Grid.Column="1" Content="Dodaj" FontSize="20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Command="{Binding AddVertexCommand}"/>
+        <Button Grid.Column="0" Grid.Row="2" Content="Usuń" FontSize="20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Command="{Binding RemoveVertexCommand}"/>
+        <Label Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Content="Krawędzie" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
+        <Label Grid.Column="0" Grid.Row="4" Content="Od" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="4" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="35" TextAlignment="Center" Text="{Binding NewEdgeFromValue,Mode=TwoWay}"/>
+        <Label Grid.Column="0" Grid.Row="5" Content="Do" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="5" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="35" TextAlignment="Center" Text="{Binding NewEdgeToValue,Mode=TwoWay}"/>
+        <Button Grid.Row="6" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Dodaj" FontSize="20" Command="{Binding AddEdgeCommand}"/>
+        <Button Grid.Column="0" Grid.Row="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Usuń" FontSize="20" Command="{Binding RemoveEdgeCommand}"/>
+        <Image Grid.Row="1" Grid.Column="2" Grid.RowSpan="6" Grid.ColumnSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="{Binding ImageBytes,Mode=OneWay,Converter={StaticResource ByteToBitmapValueConverter}}"/>
+      
+    </Grid>
+
+  
 </views:MvxWpfView>
 

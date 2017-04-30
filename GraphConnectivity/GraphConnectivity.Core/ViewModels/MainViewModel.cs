@@ -105,6 +105,15 @@ namespace GraphConnectivity.Core.ViewModels
             set { _isConnected = value; RaisePropertyChanged(() => IsConnected); }
         }
 
+        private bool _isStronglyConnected;
+
+        public bool IsStronglyConnected
+        {
+            get { return _isStronglyConnected; }
+            set { _isStronglyConnected = value; RaisePropertyChanged(() => IsStronglyConnected); }
+        }
+
+
         private byte[] _imageBytes;
 
         public byte[] ImageBytes
@@ -120,6 +129,9 @@ namespace GraphConnectivity.Core.ViewModels
             NewEdgeFromValue = "";
             NewEdgeToValue = "";
             NewVertexValue = "";
+
+            IsConnected = _graph.CalculateConnectivity();
+            IsStronglyConnected = _graph.CalculateStrongConnectivity();
         }
 
         private void AddVertexHandler()
