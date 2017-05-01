@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System.Text.RegularExpressions;
 using GraphConnectivity.Core.Models;
 using GraphConnectivity.Core.Services;
 using MvvmCross.Core.ViewModels;
@@ -41,6 +41,8 @@ namespace GraphConnectivity.Core.ViewModels
             set
             {
                 _newVertexValue = value;
+                var regex = new Regex(@"\W");
+                _newVertexValue = regex.Replace(_newVertexValue, "");
                 RaisePropertyChanged(() => NewVertexValue);
             }
         }
@@ -161,8 +163,6 @@ namespace GraphConnectivity.Core.ViewModels
 
         private void RefreshVisualisation()
         {
-            ImageBytes = _graphVizualiser.VisualiseGraph(_graph);
-
             NewEdgeFromValue = "";
             NewEdgeToValue = "";
             NewVertexValue = "";
@@ -172,6 +172,8 @@ namespace GraphConnectivity.Core.ViewModels
 
             IsConnected = ConnectedComponents == 1;
             IsStronglyConnected = StronglyConnectedComponents == 1;
+
+            ImageBytes = _graphVizualiser.VisualiseGraph(_graph);
         }
 
         private void AddVertexHandler()
