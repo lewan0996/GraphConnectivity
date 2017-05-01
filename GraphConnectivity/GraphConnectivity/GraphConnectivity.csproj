@@ -80,6 +80,7 @@
     <Compile Include="Converters\NativeBigLabelFontSizeValueConverter.cs" />
     <Compile Include="Converters\NativeButtonFontSizeValueConverter.cs" />
     <Compile Include="Converters\NativeByteToBitmapValueConverter.cs" />
+    <Compile Include="Converters\NativeNumberOfComponentsValueConverter.cs" />
     <Compile Include="Converters\NativeSmallLabelFontSizeValueConverter.cs" />
     <Compile Include="Converters\NativeTextBoxFontSizeValueConverter.cs" />
     <Compile Include="Services\GraphVizGraphVizualiser.cs" />

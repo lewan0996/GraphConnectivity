@@ -18,6 +18,7 @@
         <converters:NativeBigLabelFontSizeValueConverter x:Key="BigLabelFontSizeValueConverter"/>
         <converters:NativeSmallLabelFontSizeValueConverter x:Key="SmallLabelFontSizeValueConverter"/>
         <converters:NativeTextBoxFontSizeValueConverter x:Key="TextBoxFontSizeValueConverter"/>
+        <converters:NativeNumberOfComponentsValueConverter x:Key="NumberOfComponentsValueConverter"/>
 
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="Black"/>
@@ -49,6 +50,8 @@
         <Label Content="Wierzchołki" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="{Binding ElementName=BtnDeleteVertex, Path=ActualHeight,Converter={StaticResource SmallLabelFontSizeValueConverter},Mode=OneWay}"/>
         <Label Content="Spójny" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="{Binding ElementName=BtnDeleteVertex, Path=ActualHeight,Converter={StaticResource BigLabelFontSizeValueConverter},Mode=OneWay}" IsEnabled="{Binding IsConnected,Mode=OneWay}"/>
         <Label Content="Silnie spójny" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="{Binding ElementName=BtnDeleteVertex, Path=ActualHeight,Converter={StaticResource BigLabelFontSizeValueConverter},Mode=OneWay}" IsEnabled="{Binding IsStronglyConnected}"/>
+        <Label Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="{Binding ElementName=BtnDeleteVertex,Path=ActualHeight,Converter={StaticResource BigLabelFontSizeValueConverter}}" Content="{Binding ConnectedComponents, Converter={StaticResource NumberOfComponentsValueConverter}}"/>
+        <Label Grid.Column="3" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="{Binding ElementName=BtnDeleteVertex,Path=ActualHeight,Converter={StaticResource BigLabelFontSizeValueConverter}}" Content="{Binding StronglyConnectedComponents, Converter={StaticResource NumberOfComponentsValueConverter}}"></Label>
         <TextBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="{Binding ElementName=BtnDeleteVertex, Path=ActualHeight,Converter={StaticResource TextBoxFontSizeValueConverter},Mode=OneWay}" TextAlignment="Center" Text="{Binding NewVertexValue, Mode=TwoWay}"/>
         <Button Grid.Row="2" Grid.Column="1" Content="Dodaj" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="{Binding ElementName=BtnDeleteVertex, Path=ActualHeight,Converter={StaticResource ButtonFontSizeValueConverter},Mode=OneWay}" Command="{Binding AddVertexCommand}"/>
         <Button x:Name="BtnDeleteVertex" Grid.Column="0" Grid.Row="2" Content="Usuń" FontSize="{Binding ElementName=BtnDeleteVertex, Path=ActualHeight,Converter={StaticResource ButtonFontSizeValueConverter},Mode=OneWay}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Command="{Binding RemoveVertexCommand}"/>
@@ -59,7 +62,7 @@
         <TextBox Grid.Row="5" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="{Binding ElementName=BtnDeleteVertex, Path=ActualHeight,Converter={StaticResource TextBoxFontSizeValueConverter},Mode=OneWay}" TextAlignment="Center" Text="{Binding NewEdgeToValue,Mode=TwoWay}"/>
         <Button Grid.Row="6" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Dodaj" FontSize="{Binding ElementName=BtnDeleteVertex, Path=ActualHeight,Converter={StaticResource ButtonFontSizeValueConverter},Mode=OneWay}" Command="{Binding AddEdgeCommand}"/>
         <Button Grid.Column="0" Grid.Row="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Usuń" FontSize="{Binding ElementName=BtnDeleteVertex, Path=ActualHeight,Converter={StaticResource ButtonFontSizeValueConverter},Mode=OneWay}" Command="{Binding RemoveEdgeCommand}"/>
-        <Image Grid.Row="1" Grid.Column="2" Grid.RowSpan="5" Grid.ColumnSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="{Binding ImageBytes,Mode=OneWay,Converter={StaticResource ByteToBitmapValueConverter}}"/>
+        <Image Grid.Row="2" Grid.Column="2" Grid.RowSpan="4" Grid.ColumnSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="{Binding ImageBytes,Mode=OneWay,Converter={StaticResource ByteToBitmapValueConverter}}"/>
         <Button Grid.Row="6" Grid.Column="3" Content="Czyść" FontSize="{Binding ElementName=BtnDeleteVertex, Path=ActualHeight,Converter={StaticResource ButtonFontSizeValueConverter},Mode=OneWay}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Command="{Binding ClearCommand}"></Button>
 
     </Grid>

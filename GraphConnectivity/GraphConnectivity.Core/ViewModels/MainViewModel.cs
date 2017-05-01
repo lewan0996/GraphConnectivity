@@ -16,6 +16,23 @@ namespace GraphConnectivity.Core.ViewModels
             _graph = new Graph<string>();
         }
 
+        private int _connectedComponents;
+
+        public int ConnectedComponents
+        {
+            get { return _connectedComponents; }
+            set { _connectedComponents = value; RaisePropertyChanged(() => ConnectedComponents); }
+        }
+
+        private int _stronglyConnectedComponents;
+
+        public int StronglyConnectedComponents
+        {
+            get { return _stronglyConnectedComponents; }
+            set { _stronglyConnectedComponents = value; RaisePropertyChanged(() => StronglyConnectedComponents); }
+        }
+
+
         private string _newVertexValue;
 
         public string NewVertexValue
@@ -111,6 +128,8 @@ namespace GraphConnectivity.Core.ViewModels
         private void ClearHandler()
         {
             _graph.Clear();
+            StronglyConnectedComponents = 0;
+            ConnectedComponents = 0;
             RefreshVisualisation();
         }
 
@@ -148,8 +167,11 @@ namespace GraphConnectivity.Core.ViewModels
             NewEdgeToValue = "";
             NewVertexValue = "";
 
-            IsConnected = _graph.CalculateConnectivity() == 1;
-            IsStronglyConnected = _graph.CalculateStrongConnectivity() == 1;
+            ConnectedComponents = _graph.CalculateConnectivity();
+            StronglyConnectedComponents = _graph.CalculateStrongConnectivity();
+
+            IsConnected = ConnectedComponents == 1;
+            IsStronglyConnected = StronglyConnectedComponents == 1;
         }
 
         private void AddVertexHandler()

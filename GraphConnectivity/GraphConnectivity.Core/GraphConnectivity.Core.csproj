@@ -37,6 +37,7 @@
     <Compile Include="App.cs" />
     <Compile Include="Converters\BigLabelFontSizeValueConverter.cs" />
     <Compile Include="Converters\ButtonFontSizeValueConverter.cs" />
+    <Compile Include="Converters\NumberOfComponentsValueConverter.cs" />
     <Compile Include="Converters\SmallLabelFontSizeValueConverter.cs" />
     <Compile Include="Converters\TextBoxFontSizeValueConverter.cs" />
     <Compile Include="Models\Graph.cs" />
