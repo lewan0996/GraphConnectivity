@@ -5,9 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GraphConnectivity"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <Image x:Name="imgGraph" HorizontalAlignment="Left" Height="301" Margin="10,10,0,0" VerticalAlignment="Top" Width="498"/>
-
-    </Grid>
+        MinHeight="300"
+        MinWidth="400"
+        Title="MainWindow" Height="300" Width="400">
+    
 </Window>
