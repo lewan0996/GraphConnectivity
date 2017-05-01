@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using GraphConnectivity.Core.ViewModels;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
