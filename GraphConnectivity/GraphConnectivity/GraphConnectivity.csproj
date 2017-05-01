@@ -77,8 +77,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\ByteToBitmapValueConverter.cs" />
+    <Compile Include="Converters\NativeBigLabelFontSizeValueConverter.cs" />
+    <Compile Include="Converters\NativeButtonFontSizeValueConverter.cs" />
     <Compile Include="Converters\NativeByteToBitmapValueConverter.cs" />
-    <Compile Include="NativeByteToBitmapConverter.cs" />
+    <Compile Include="Converters\NativeSmallLabelFontSizeValueConverter.cs" />
     <Compile Include="Services\GraphVizGraphVizualiser.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="Views\MainView.xaml.cs">

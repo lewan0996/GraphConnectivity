@@ -97,6 +97,24 @@ namespace GraphConnectivity.Core.ViewModels
             }
         }
 
+        private MvxCommand _clearCommand;
+
+        public MvxCommand ClearCommand
+        {
+            get
+            {
+                _clearCommand = _clearCommand ?? new MvxCommand(ClearHandler);
+                return _clearCommand;
+            }
+        }
+
+        private void ClearHandler()
+        {
+            _graph.Clear();
+            RefreshVisualisation();
+        }
+
+
         private bool _isConnected;
 
         public bool IsConnected
@@ -104,6 +122,15 @@ namespace GraphConnectivity.Core.ViewModels
             get { return _isConnected; }
             set { _isConnected = value; RaisePropertyChanged(() => IsConnected); }
         }
+
+        private bool _isStronglyConnected;
+
+        public bool IsStronglyConnected
+        {
+            get { return _isStronglyConnected; }
+            set { _isStronglyConnected = value; RaisePropertyChanged(() => IsStronglyConnected); }
+        }
+
 
         private byte[] _imageBytes;
 
@@ -120,12 +147,18 @@ namespace GraphConnectivity.Core.ViewModels
             NewEdgeFromValue = "";
             NewEdgeToValue = "";
             NewVertexValue = "";
+
+            IsConnected = _graph.CalculateConnectivity() == 1;
+            IsStronglyConnected = _graph.CalculateStrongConnectivity() == 1;
         }
 
         private void AddVertexHandler()
         {
-            _graph.AddVertex(NewVertexValue);
-            RefreshVisualisation();
+            if (!string.IsNullOrEmpty(NewVertexValue))
+            {
+                _graph.AddVertex(NewVertexValue);
+                RefreshVisualisation();
+            }
         }
 
         private void RemoveVertexHandler()
@@ -136,14 +169,20 @@ namespace GraphConnectivity.Core.ViewModels
 
         private void AddEdgeHandler()
         {
-            _graph.AddEdgeByValues(NewEdgeFromValue, NewEdgeToValue);
-            RefreshVisualisation();
+            if (!string.IsNullOrEmpty(NewEdgeFromValue) && !string.IsNullOrEmpty(NewEdgeToValue))
+            {
+                _graph.AddEdgeByValues(NewEdgeFromValue, NewEdgeToValue);
+                RefreshVisualisation();
+            }
         }
 
         private void RemoveEdgeHandler()
         {
-            _graph.RemoveEdgeByValues(NewEdgeFromValue, NewEdgeToValue);
-            RefreshVisualisation();
+            if (!string.IsNullOrEmpty(NewEdgeFromValue) && !string.IsNullOrEmpty(NewEdgeToValue))
+            {
+                _graph.RemoveEdgeByValues(NewEdgeFromValue, NewEdgeToValue);
+                RefreshVisualisation();
+            }
         }
     }
 }
