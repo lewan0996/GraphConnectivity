@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace GraphConnectivity.Core.Models
 {
@@ -44,10 +43,11 @@ namespace GraphConnectivity.Core.Models
             Vertices = new List<Vertex<T>>();
         }
 
-        public void AddVertex(T value)
+        public Vertex<T> AddVertex(T value)
         {
             Vertex<T> vertex = new Vertex<T>(value);
             Vertices.Add(vertex);
+            return vertex;
         }
 
         public void RemoveVertexByValue(T value)
@@ -81,6 +81,15 @@ namespace GraphConnectivity.Core.Models
         {
             var vertexFrom = Vertices.FirstOrDefault(v => v.Value.Equals(from));
             var vertexTo = Vertices.FirstOrDefault(v => v.Value.Equals(to));
+
+            if (vertexFrom == null)
+            {
+                vertexFrom = AddVertex(from);
+            }
+            if (vertexTo == null)
+            {
+                vertexTo = AddVertex(to);
+            }
 
             AddEdge(vertexFrom, vertexTo);
         }
