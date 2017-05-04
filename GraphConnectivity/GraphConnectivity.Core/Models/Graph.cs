@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+using MvvmCross.Platform.UI;
 
 namespace GraphConnectivity.Core.Models
 {
@@ -14,11 +14,13 @@ namespace GraphConnectivity.Core.Models
             public bool Visited { get; set; }
             public int Pre { get; set; }
             public int Post { get; set; }
+            public int Color { get; set; }
 
             public Vertex(TValue value)
             {
                 Value = value;
                 AdjacentEdges = new List<Edge<T, T>>();
+                Color = 0;
             }
         }
         public class Edge<TFrom, TTo>
@@ -38,10 +40,12 @@ namespace GraphConnectivity.Core.Models
 
         public List<Vertex<T>> Vertices { get; set; }
         private int _counter;
+        private Random _colorRandomizer;
 
         public Graph()
         {
             Vertices = new List<Vertex<T>>();
+            _colorRandomizer = new Random();
         }
 
         public void AddVertex(T value)
@@ -101,17 +105,20 @@ namespace GraphConnectivity.Core.Models
         {
             _counter = 1;
             var componentCounter = 0;
+            // var color = 0;
+
             foreach (var vertex in Vertices)
             {
                 vertex.Visited = false;
             }
             DuplicateAndReverseEdges();
-            foreach(var vertex in Vertices)
+            foreach (var vertex in Vertices)
             {
                 if (!vertex.Visited)
                 {
                     componentCounter++;
-                    Explore(vertex);
+                    //color += 50;
+                    Explore(vertex, 0);
                 }
             }
             RemoveAllEdges(e => e.IsRedundant);
@@ -127,7 +134,7 @@ namespace GraphConnectivity.Core.Models
                     var edge = vertex.AdjacentEdges[index];
                     if (!edge.IsRedundant)
                     {
-                        edge.To.AdjacentEdges.Add(new Edge<T, T>(edge.To, vertex) {IsRedundant = true});
+                        edge.To.AdjacentEdges.Add(new Edge<T, T>(edge.To, vertex) { IsRedundant = true });
                     }
                 }
             }
@@ -154,9 +161,10 @@ namespace GraphConnectivity.Core.Models
                 }
             }
         }
-        private void Explore(Vertex<T> v)
+        private void Explore(Vertex<T> v, int color)
         {
             v.Visited = true;
+            v.Color = color;
             v.Pre = _counter;
             _counter++;
 
@@ -164,7 +172,7 @@ namespace GraphConnectivity.Core.Models
             {
                 if (!edge.To.Visited)
                 {
-                    Explore(edge.To);
+                    Explore(edge.To, color);
                 }
             }
 
@@ -176,6 +184,7 @@ namespace GraphConnectivity.Core.Models
         {
             Reverse();
             _counter = 1;
+            var color = 16000000;
             foreach (var vertex in Vertices)
             {
                 vertex.Visited = false;
@@ -185,7 +194,7 @@ namespace GraphConnectivity.Core.Models
             {
                 if (!vertex.Visited)
                 {
-                    Explore(vertex);
+                    Explore(vertex, color);
                 }
             }
 
@@ -204,7 +213,8 @@ namespace GraphConnectivity.Core.Models
                 if (!vertex.Visited)
                 {
                     componentCounter++;
-                    Explore(vertex);
+                    Explore(vertex, color);
+                    color = _colorRandomizer.Next(1000000, 16000000);
                 }
             }
             return componentCounter;
