@@ -8,12 +8,12 @@ namespace GraphConnectivity.Core.Converters
     {
         protected override double Convert(double value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value / 2;
+            return value / 4.0;
         }
 
         protected override double ConvertBack(double value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value * 2;
+            return value * 4.0;
         }
     }
 }

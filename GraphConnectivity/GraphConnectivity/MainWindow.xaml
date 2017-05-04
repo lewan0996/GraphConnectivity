@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GraphConnectivity"
         mc:Ignorable="d"
-        MinHeight="300"
-        MinWidth="400"
+        MinHeight="500"
+        MinWidth="700"
         Title="Silna spójność grafów" Height="300" Width="400">
     
 </Window>

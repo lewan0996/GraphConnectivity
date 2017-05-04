@@ -29,11 +29,11 @@ namespace GraphConnectivity.Services
 
             foreach (var vertex in graph.Vertices)
             {
-                if (vertex.AdjacentEdges.Count == 0)
-                {
-                    graphString += vertex.Value + ";";
-                    continue;
-                }
+                //if (vertex.AdjacentEdges.Count == 0)
+                //{
+                    graphString += $"{vertex.Value}[style=\"filled\" fillcolor=\"#{vertex.Color:X6}\"];";
+                    //continue;
+                    //  }
                 foreach (var edge in vertex.AdjacentEdges)
                 {
                     graphString += vertex.Value + " -> " + edge.To.Value + ";";
@@ -41,6 +41,7 @@ namespace GraphConnectivity.Services
             }
             graphString += "}";
             return graphString;
+            //return "digraph{a[color=blue];b[color=red];a->b[color=\"#00FF00\"]}";
         }
     }
 }
