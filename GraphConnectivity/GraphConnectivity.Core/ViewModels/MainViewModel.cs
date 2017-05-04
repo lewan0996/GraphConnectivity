@@ -187,8 +187,11 @@ namespace GraphConnectivity.Core.ViewModels
 
         private void RemoveVertexHandler()
         {
-            _graph.RemoveVertexByValue(NewVertexValue);
-            RefreshVisualisation();
+            if (!string.IsNullOrEmpty(NewVertexValue))
+            {
+                _graph.RemoveVertexByValue(NewVertexValue);
+                RefreshVisualisation();
+            }
         }
 
         private void AddEdgeHandler()
