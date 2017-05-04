@@ -48,10 +48,11 @@ namespace GraphConnectivity.Core.Models
             _colorRandomizer = new Random();
         }
 
-        public void AddVertex(T value)
+        public Vertex<T> AddVertex(T value)
         {
             Vertex<T> vertex = new Vertex<T>(value);
             Vertices.Add(vertex);
+            return vertex;
         }
 
         public void RemoveVertexByValue(T value)
@@ -85,6 +86,15 @@ namespace GraphConnectivity.Core.Models
         {
             var vertexFrom = Vertices.FirstOrDefault(v => v.Value.Equals(from));
             var vertexTo = Vertices.FirstOrDefault(v => v.Value.Equals(to));
+
+            if (vertexFrom == null)
+            {
+                vertexFrom = AddVertex(from);
+            }
+            if (vertexTo == null)
+            {
+                vertexTo = AddVertex(to);
+            }
 
             AddEdge(vertexFrom, vertexTo);
         }
