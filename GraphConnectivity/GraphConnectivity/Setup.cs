@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Threading;
+﻿using System.Windows.Threading;
 using GraphConnectivity.Core.Services;
 using GraphConnectivity.Services;
 using MvvmCross.Core.ViewModels;
@@ -21,7 +17,7 @@ namespace GraphConnectivity
         protected override IMvxApplication CreateApp()
         {
             Mvx.RegisterType<IGraphVizualiser,GraphVizGraphVizualiser>();
-          return new Core.App();
+            return new Core.App();
         }
     }
 }
