@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MvvmCross.Platform.UI;
 
 namespace GraphConnectivity.Core.Models
 {
@@ -224,7 +223,8 @@ namespace GraphConnectivity.Core.Models
                 {
                     componentCounter++;
                     Explore(vertex, color);
-                    color = _colorRandomizer.Next(1000000, 16000000);
+                    //color = _colorRandomizer.Next(1000000, 16000000);
+                    color = RandomColor();
                 }
             }
             return componentCounter;
@@ -234,5 +234,31 @@ namespace GraphConnectivity.Core.Models
         {
             Vertices.Clear();
         }
+
+        private int RandomColor()
+        {
+            var isFarEnough = false;
+            var color = 0;
+
+            while (!isFarEnough)
+            {
+                var r = _colorRandomizer.Next(50, 255);
+                var g = _colorRandomizer.Next(50, 255);
+                var b = _colorRandomizer.Next(50, 255);
+
+                var rHex = r.ToString("X");
+                var gHex = g.ToString("X");
+                var bHex = b.ToString("X");
+
+                var hex = rHex + gHex + bHex;
+
+                color = Convert.ToInt32(hex, 16);
+
+                isFarEnough = Vertices.All(vertex => Math.Abs(vertex.Color - color) >= 100000);
+            }
+
+            return color;
+        }
     }
 }
+
