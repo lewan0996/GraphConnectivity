@@ -223,8 +223,8 @@ namespace GraphConnectivity.Core.Models
                 {
                     componentCounter++;
                     Explore(vertex, color);
-                    //color = _colorRandomizer.Next(1000000, 16000000);
-                    color = RandomColor();
+                    color = _colorRandomizer.Next(1000000, 16000000);
+                    //color = RandomColor();
                 }
             }
             return componentCounter;
