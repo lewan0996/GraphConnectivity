@@ -39,7 +39,7 @@ namespace GraphConnectivity.Core.Models
 
         public List<Vertex<T>> Vertices { get; set; }
         private int _counter;
-        private Random _colorRandomizer;
+        private readonly Random _colorRandomizer;
 
         public Graph()
         {
@@ -49,9 +49,15 @@ namespace GraphConnectivity.Core.Models
 
         public Vertex<T> AddVertex(T value)
         {
-            Vertex<T> vertex = new Vertex<T>(value);
-            Vertices.Add(vertex);
-            return vertex;
+            
+            if (!Vertices.Any(v => v.Value.Equals(value)))
+            {
+                Vertex<T> vertex = new Vertex<T>(value);
+                Vertices.Add(vertex);
+                return vertex;
+            }
+                
+            return null;
         }
 
         public void RemoveVertexByValue(T value)
